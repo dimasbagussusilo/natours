@@ -31,7 +31,7 @@ app.set('views', path.join(__dirname, 'views'));
 // 1) GLOBAL MIDDLEWARES
 // Implement CORS
 const corsOptions = {
-  origin: '*',
+  origin: 'https://reman.netlify.app/profile',
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200
 };
