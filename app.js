@@ -31,10 +31,10 @@ app.set('views', path.join(__dirname, 'views'));
 // 1) GLOBAL MIDDLEWARES
 // Implement CORS
 const corsOptions = {
-  origin: 'https://reman.netlify.app', 
+  origin: 'https://reman.netlify.app',
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200
-}
+};
 
 app.use(cors(corsOptions));
 // Access-Control-Allow-Origin *
@@ -42,7 +42,6 @@ app.use(cors(corsOptions));
 // app.use(cors({
 //   origin: 'https://www.natours.com'
 // }))
-
 
 app.options('*', cors());
 // app.options('/api/v1/tours/:id', cors());
