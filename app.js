@@ -30,13 +30,27 @@ app.set('views', path.join(__dirname, 'views'));
 
 // 1) GLOBAL MIDDLEWARES
 // Implement CORS
-const corsOptions = {
-  origin: 'https://reman.netlify.app',
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200
-};
 
-app.use(cors(corsOptions));
+app.use((req, res, next) => {
+  const allowedOrigins = ['http://127.0.0.1:3000', 'https://reman.netlify.app'];
+  const { origin } = req.headers;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+  //res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:8020');
+  res.header('Access-Control-Allow-Methods', 'GET, PUSH, PATCH');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', true);
+  return next();
+});
+
+// const corsOptions = {
+//   origin: 'https://reman.netlify.app',
+//   credentials: true, //access-control-allow-credentials:true
+//   optionSuccessStatus: 200
+// };
+
+// app.use(cors(corsOptions));
 // Access-Control-Allow-Origin *
 // api.natours.com, front-end natours.com
 // app.use(cors({
