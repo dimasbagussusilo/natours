@@ -7,7 +7,6 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
 const compression = require('compression');
 const cors = require('cors');
 
@@ -45,7 +44,7 @@ app.set('views', path.join(__dirname, 'views'));
 // });
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: 'https://reman.netlify.app',
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200
 };
@@ -82,7 +81,7 @@ app.use('/api', limiter);
 // Stripe webhook, BEFORE body-parser, because stripe needs the body as stream
 app.post(
   '/webhook-checkout',
-  bodyParser.raw({ type: 'application/json' }),
+  express.raw({ type: 'application/json' }),
   bookingController.webhookCheckout
 );
 
