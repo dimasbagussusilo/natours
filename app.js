@@ -43,10 +43,15 @@ app.set('views', path.join(__dirname, 'views'));
 //   return next();
 // });
 
+const whitelist = ['http://localhost:3000', 'https://reman.netlify.app'];
 const corsOptions = {
-  origin: 'https://reman.netlify.app',
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200
+  origin: function(origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
 };
 
 app.use(cors(corsOptions));
